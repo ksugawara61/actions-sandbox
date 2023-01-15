@@ -13,6 +13,26 @@ jobs:
       - name: Show Release MY_SECRET
         run: echo ${{ secrets.MY_SECRET }}
 
+  releaseA:
+    runs-on: ubuntu-20.04
+    environment:
+      name: Release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Release1
+        run: echo ${{ vars.MY_ENV }}
+
+  releaseB:
+    runs-on: ubuntu-20.04
+    environment:
+      name: Release2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Release2
+        run: echo ${{ vars.MY_ENV }}
+
   release1:
     runs-on: ubuntu-20.04
     needs: [confirm]
