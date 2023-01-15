@@ -11,4 +11,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Release
-        run: echo "Release!"
+        run: echo $MY_SECRET
