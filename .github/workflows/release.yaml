@@ -44,7 +44,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Show Release MY_SECRET
-        run: echo ${{ vars.MY_SECRET }}
+        run: echo ${{ secrets.MY_SECRET }}
       - name: Show REPOSITORY_SECRET
         run: echo ${{ secrets.REPOSITORY_SECRET }}
 
