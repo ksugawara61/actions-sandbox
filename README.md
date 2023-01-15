@@ -17,7 +17,10 @@ Release | ksugawara61
 - Environment variablesを設定した場合は　${{ vars.MY_ENV }} のようにvarsを利用する
 - Envrionmentsを設定していないJob内でEnvironmentsのSecretを使用するこはできない
 - branch protection rulesでは正規表現で部分一致を指定可能
+- Github Releaseのテンプレートはないらしい
+  - [Issue と PRのテンプレートのみサポート](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)
 
 ## 参考URL
 
 - https://zenn.dev/matken/articles/approve-deployments-with-github-environments
+- https://stackoverflow.com/questions/56798253/release-template-for-github
