@@ -16,7 +16,7 @@ Release | ksugawara61
 - Releaseトリガーの場合ブランチ名はタグ名（ex: release/v1.0.0）になる
 - Environment variablesを設定した場合は　${{ vars.MY_ENV }} のようにvarsを利用する
 - Envrionmentsを設定していないJob内でEnvironmentsのSecretを使用するこはできない
-- branch protection rulesでは正規表現で部分一致を指定可能
+- [branch protection rulesでは正規表現で部分一致を指定可能](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule)
 - Github Releaseのテンプレートはないらしい
   - [Issue と PRのテンプレートのみサポート](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates)
 
@@ -24,3 +24,4 @@ Release | ksugawara61
 
 - https://zenn.dev/matken/articles/approve-deployments-with-github-environments
 - https://stackoverflow.com/questions/56798253/release-template-for-github
+- https://qiita.com/da-sugi/items/ba3cd83e64c689795c50
