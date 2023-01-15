@@ -3,23 +3,30 @@ on:
   workflow_dispatch:
 
 jobs:
+  runs-on: ubuntu-20.04
   confirm:
-    runs-on: ubuntu-20.04
-    environment:
-      name: Release
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Release
+      - name: Show Release
         run: echo ${{ secrets.MY_SECRET }}
 
-  release:
+  release1:
     needs: [confirm]
-    runs-on: ubuntu-20.04
     environment:
       name: Release
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Release
-        run: echo ${{ secrets.MY_SECRET }}
+      - name: Release1
+        run: echo ${{ env.MY_EMV }}
+
+  release2:
+    needs: [confirm]
+    environment:
+      name: Release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Release2
+        run: echo ${{ env.MY_EMV }}
