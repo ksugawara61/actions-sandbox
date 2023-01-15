@@ -6,7 +6,7 @@ Github Actionsの検証用リポジトリ
 
 name | reviewrs
 :--- | :---
-production | ksugawara61
+Release | ksugawara61
 
 ## 参考URL
 
