@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs: [release2]
     environment:
-      name: Release
+      name: Release2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
