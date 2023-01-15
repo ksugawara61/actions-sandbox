@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Show Release
+      - name: Show Release MY_SECRET
         run: echo ${{ secrets.MY_SECRET }}
 
   release1:
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Release1
-        run: echo ${{ env.MY_ENV }}
+        run: echo ${{ vars.MY_ENV }}
 
   release2:
     runs-on: ubuntu-20.04
@@ -43,5 +43,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Release3
-        run: echo ${{ vars.MY_ENV }}
+      - name: Show Release MY_SECRET
+        run: echo ${{ vars.MY_SECRET }}
+      - name: Show REPOSITORY_SECRET
+        run: echo ${{ secrets.REPOSITORY_SECRET }}
+
+  release4:
+    runs-on: ubuntu-20.04
+    needs: [release2]
+    environment:
+      name: Release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Show REPOSITORY_SECRET
+        run: echo ${{ secrets.REPOSITORY_SECRET }}
