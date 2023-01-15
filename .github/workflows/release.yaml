@@ -1,6 +1,8 @@
 name: Release App
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   confirm:
@@ -20,15 +22,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Release1
-        run: echo ${{ env.MY_EMV }}
+        run: echo ${{ env.MY_ENV }}
 
   release2:
     runs-on: ubuntu-20.04
     needs: [confirm]
     environment:
-      name: Release
+      name: Release2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Release2
-        run: echo ${{ env.MY_EMV }}
+        run: echo ${{ env.MY_ENV }}
+
+  release3:
+    runs-on: ubuntu-20.04
+    needs: [release1]
+    environment:
+      name: Release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Release3
+        run: echo ${{ env.MY_ENV }}
