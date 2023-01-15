@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Release2
-        run: echo ${{ env.MY_ENV }}
+        run: echo ${{ vars.MY_ENV }}
 
   release3:
     runs-on: ubuntu-20.04
@@ -44,4 +44,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Release3
-        run: echo ${{ env.MY_ENV }}
+        run: echo ${{ vars.MY_ENV }}
