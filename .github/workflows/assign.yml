@@ -2,21 +2,29 @@ name: PR Assign
 
 on:
   pull_request:
-    types: [opened, unassigned]
-  pull_request_target:
-    types: [opened, unassigned]
+    types: [opened]
+
+permissions:
+  pull-requests: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_REPO: ${{ github.repository }}
+  PR_NUMBER: ${{ github.event.pull_request.number }}
 
 jobs:
   assign:
     runs-on: ubuntu-20.04
-    timeout-minutes: 3
+    timeout-minutes: 2
 
     steps:
       - run: cat $GITHUB_EVENT_PATH
-      - run: gh pr edit $NUMBER --add-assignee $ASSIGNEE
+      - name: Assign PR assignee
+        run: gh pr edit $PR_NUMBER --add-assignee $PR_ASSIGNEE
         env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.pull_request.number }}
-          ASSIGNEE: ${{ github.event.pull_request.user.login }}
-        if: ${{ toJSON(github.event.pull_request.assignees) == '[]' }}
+          PR_ASSIGNEE: ${{ github.event.pull_request.user.login }}
+      - name: Assign PR reviewer
+        run: gh pr edit $PR_NUMBER --add-reviewer $PR_REVIEWER
+        env:
+          # TODO: ランダムアサインの処理
+          PR_REVIEWER: ${{ github.event.pull_request.user.login }}
