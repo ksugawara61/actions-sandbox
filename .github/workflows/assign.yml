@@ -2,7 +2,7 @@ name: PR Assign
 
 on:
   pull_request:
-    # types: [opened, unassigned]
+    types: [opened]
 
 permissions:
   pull-requests: write
@@ -15,7 +15,7 @@ env:
 jobs:
   assign:
     runs-on: ubuntu-20.04
-    timeout-minutes: 3
+    timeout-minutes: 2
 
     steps:
       - run: cat $GITHUB_EVENT_PATH
@@ -26,4 +26,5 @@ jobs:
       - name: Assign PR reviewer
         run: gh pr edit $PR_NUMBER --add-reviewer $PR_REVIEWER
         env:
+          # TODO: ランダムアサインの処理
           PR_REVIEWER: ${{ github.event.pull_request.user.login }}
