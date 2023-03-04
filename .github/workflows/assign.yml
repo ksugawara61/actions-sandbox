@@ -10,6 +10,7 @@ permissions:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GH_REPO: ${{ github.repository }}
+  PR_NUMBER: ${{ github.event.pull_request.number }}
 
 jobs:
   assign:
@@ -18,8 +19,11 @@ jobs:
 
     steps:
       - run: cat $GITHUB_EVENT_PATH
-      - run: gh pr edit $PR_NUMBER --add-assignee $PR_ASSIGNEE
+      - name: Assign PR assignee
+        run: gh pr edit $PR_NUMBER --add-assignee $PR_ASSIGNEE
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
           PR_ASSIGNEE: ${{ github.event.pull_request.user.login }}
-        if: ${{ toJSON(github.event.pull_request.assignees) == '[]' }}
+      - name: Assign PR reviewer
+        run: gh pr edit $PR_NUMBER --add-reviewer $PR_REVIEWER
+        env:
+          PR_REVIEWER: ${{ github.event.pull_request.user.login }}
