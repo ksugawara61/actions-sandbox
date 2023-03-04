@@ -2,7 +2,7 @@ name: PR Assign
 
 on:
   pull_request_target:
-    types: [opened, unassigned]
+    # types: [opened, unassigned]
 
 jobs:
   assign:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - run: cat $GITHUB_EVENT_PATH
-      - run: gh pr edit $NUMBER --add-assignee $ASSIGNEE
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.pull_request.number }}
-          ASSIGNEE: ${{ github.event.pull_request.user.login }}
+      - run: gh pr edit $NUMBER --add-assignee ${{ github.event.pull_request.user.login }}
+        # env:
+        #   GH_TOKEN: ${{ github.token }}
+        #   GH_REPO: ${{ github.repository }}
+        #   NUMBER: ${{ github.event.pull_request.number }}
+        #   ASSIGNEE: ${{ github.event.pull_request.user.login }}
         if: ${{ toJSON(github.event.pull_request.assignees) == '[]' }}
