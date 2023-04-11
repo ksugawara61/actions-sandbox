@@ -1,0 +1,10 @@
+name: Workflow Call
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  call:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "HELLO CALL"

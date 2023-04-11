@@ -55,6 +55,10 @@ jobs:
       - name: Release2
         run: echo ${{ vars.MY_ENV }}
 
+  call_other_workflow:
+    needs: [confirm]
+    uses: ./.github/workflows/call.yml
+
   release3:
     runs-on: ubuntu-20.04
     needs: [release1]
