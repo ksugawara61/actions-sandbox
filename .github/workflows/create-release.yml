@@ -8,13 +8,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Merge
-        uses: repo-sync/github-sync@v2
-        with:
-          source_repo: ${{ github.repository }}
-          source_branch: ${{ github.ref }}
-          destination_branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Tag Name
         run: echo "TODAY=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
       - name: Create Release Note
@@ -23,3 +16,10 @@ jobs:
           tag_name: ${{ env.TODAY }}
           target_commitish: ${{ github.sha }}
           generate_release_notes: true
+      - name: Merge
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: ${{ github.repository }}
+          source_branch: develop
+          destination_branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
