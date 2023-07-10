@@ -2,6 +2,9 @@ name: Create Release Note
 on:
   workflow_dispatch:
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   merge_and_create_release_note:
     runs-on: ubuntu-20.04
@@ -11,7 +14,9 @@ jobs:
       - name: Setup Tag Name
         run: echo "TODAY=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
       - name: Create Release Note
-        run: gh release create ${{ env.TODAY }} --target ${{ github.sha }} --generate-notes
+        run: gh release create ${{ env.TODAY }} --target $TARGET --generate-notes
+        env:
+          TARGET: ${{ github.sha }}
       - name: Merge
         uses: repo-sync/github-sync@v2
         with:
