@@ -11,11 +11,7 @@ jobs:
       - name: Setup Tag Name
         run: echo "TODAY=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
       - name: Create Release Note
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.TODAY }}
-          target_commitish: ${{ github.sha }}
-          generate_release_notes: true
+        run: gh release create ${{ env.TODAY }} --target ${{ github.sha }} --generate-notes
       - name: Merge
         uses: repo-sync/github-sync@v2
         with:
