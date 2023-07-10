@@ -4,6 +4,7 @@ on:
 
 env:
   GH_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+  TZ: 'Asia/Tokyo'
 
 jobs:
   merge_and_create_release_note:
@@ -18,7 +19,9 @@ jobs:
           source_branch: develop
           destination_branch: main
           github_token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+      - name: Setup Tag Name
+        run: echo "CURRENT_DATETIME=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
       - name: Create Release Note
         run: gh release create $TAG --target main --generate-notes
         env:
-          TAG: $(date +'%Y-%m-%d-%H-%M')
+          TAG: ${{ env.CURRENT_DATETIME }}
