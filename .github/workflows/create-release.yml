@@ -18,7 +18,7 @@ jobs:
         run: gh pr create --title "Release $CURRENT_DATETIME" --body "Release $CURRENT_DATETIME" --base main --head develop --assignee "$PR_ASSIGNEE"
         # TODO: --reviewer $PR_REVIEWER
         env:
-            PR_ASSIGNEE: ${{ github.event.pull_request.user.login }}
+            PR_ASSIGNEE: ${{ github.event.workflow_dispatch.user.login }}
       - name: Auto Merge Release Pull Request
         run: gh pr merge develop --merge --auto
       - name: Create Release Note
