@@ -13,15 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Tag Name
-        run: echo "CURRENT_DATETIME=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
+        run: echo "RELEASE_TAG=release/$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_ENV
       - name: Create Release Pull Request
-        run: gh pr create --title "Release $CURRENT_DATETIME" --body "Release $CURRENT_DATETIME" --base main --head develop --assignee "$PR_ASSIGNEE"
+        run: gh pr create --title "$RELEASE_TAG" --body "$RELEASE_TAG" --base main --head develop --assignee "$PR_ASSIGNEE"
         # TODO: --reviewer $PR_REVIEWER
         env:
             PR_ASSIGNEE: ${{ github.actor }}
       - name: Auto Merge Release Pull Request
         run: gh pr merge develop --merge --auto
       - name: Create Release Note
-        run: gh release create $TAG --target main --generate-notes
-        env:
-          TAG: ${{ env.CURRENT_DATETIME }}
+        run: gh release create $RELEASE_TAG --target main --generate-notes
